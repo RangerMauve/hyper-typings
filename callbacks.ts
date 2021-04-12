@@ -93,25 +93,25 @@ export interface Hypercore<E=Buffer> {
   readonly stats: NetworkStats
   readonly peers: Peer[]
 
-  on(event: 'peer-add', listener: (peer: Peer) => any)
-  on(event: 'peer-remove', listener: (peer: Peer) => any)
-  on(event: 'peer-open', listener: (peer: Peer) => any)
-  on(event: 'peer-ack', listener: (peer: Peer, have: Have) => any)
-  on(event: 'ready', listener: () => any)
-  on(event: 'error', listener: (error: Error) => any)
-  on(event: 'upload', listener: (index, data: E) => any)
-  on(event: 'append', listener: () => any)
-  on(event: 'close', listener: () => any)
+  on(event: 'peer-add', listener: (peer: Peer) => any): Hypercore
+  on(event: 'peer-remove', listener: (peer: Peer) => any): Hypercore
+  on(event: 'peer-open', listener: (peer: Peer) => any): Hypercore
+  on(event: 'peer-ack', listener: (peer: Peer, have: Have) => any): Hypercore
+  on(event: 'ready', listener: () => any): Hypercore
+  on(event: 'error', listener: (error: Error) => any): Hypercore
+  on(event: 'upload', listener: (index: number, data: E) => any): Hypercore
+  on(event: 'append', listener: () => any): Hypercore
+  on(event: 'close', listener: () => any): Hypercore
 
-  once(event: 'peer-add', listener: (peer: Peer) => any)
-  once(event: 'peer-remove', listener: (peer: Peer) => any)
-  once(event: 'peer-open', listener: (peer: Peer) => any)
-  once(event: 'peer-ack', listener: (peer: Peer, have: Have) => any)
-  once(event: 'ready', listener: () => any)
-  once(event: 'error', listener: (error: Error) => any)
-  once(event: 'upload', listener: (index, data: E) => any)
-  once(event: 'append', listener: () => any)
-  once(event: 'close', listener: () => any)
+  once(event: 'peer-add', listener: (peer: Peer) => any): Hypercore
+  once(event: 'peer-remove', listener: (peer: Peer) => any): Hypercore
+  once(event: 'peer-open', listener: (peer: Peer) => any): Hypercore
+  once(event: 'peer-ack', listener: (peer: Peer, have: Have) => any): Hypercore
+  once(event: 'ready', listener: () => any): Hypercore
+  once(event: 'error', listener: (error: Error) => any): Hypercore
+  once(event: 'upload', listener: (index: number, data: E) => any): Hypercore
+  once(event: 'append', listener: () => any): Hypercore
+  once(event: 'close', listener: () => any): Hypercore
 
   ready(cb: (err?: Error) => void): void
 
@@ -225,21 +225,21 @@ export interface Hyperdrive {
   readonly writable: boolean
   readonly peers: Peer[]
 
-  on(event: 'ready', listener: () => any)
-  on(event: 'error', listener: (error: Error) => any)
-  on(event: 'update', listener: () => any)
-  on(event: 'peer-add', listener: (peer: Peer) => any)
-  on(event: 'peer-open', listener: (peer: Peer) => any)
-  on(event: 'peer-remove', listener: (peer: Peer) => any)
-  on(event: 'close', listener: () => any)
+  on(event: 'ready', listener: () => any): Hyperdrive
+  on(event: 'error', listener: (error: Error) => any): Hyperdrive
+  on(event: 'update', listener: () => any): Hyperdrive
+  on(event: 'peer-add', listener: (peer: Peer) => any): Hyperdrive
+  on(event: 'peer-open', listener: (peer: Peer) => any): Hyperdrive
+  on(event: 'peer-remove', listener: (peer: Peer) => any): Hyperdrive
+  on(event: 'close', listener: () => any): Hyperdrive
 
-  once(event: 'ready', listener: () => any)
-  once(event: 'error', listener: (error: Error) => any)
-  once(event: 'update', listener: () => any)
-  once(event: 'peer-add', listener: (peer: Peer) => any)
-  once(event: 'peer-open', listener: (peer: Peer) => any)
-  once(event: 'peer-remove', listener: (peer: Peer) => any)
-  once(event: 'close', listener: () => any)
+  once(event: 'ready', listener: () => any): Hyperdrive
+  once(event: 'error', listener: (error: Error) => any): Hyperdrive
+  once(event: 'update', listener: () => any): Hyperdrive
+  once(event: 'peer-add', listener: (peer: Peer) => any): Hyperdrive
+  once(event: 'peer-open', listener: (peer: Peer) => any): Hyperdrive
+  once(event: 'peer-remove', listener: (peer: Peer) => any): Hyperdrive
+  once(event: 'close', listener: () => any): Hyperdrive
 
   registerExtension<M=Buffer>(name: string, handlers: ExtensionHandlers<M>): Extension<M>
 
@@ -249,7 +249,7 @@ export interface Hyperdrive {
   createTag(name: string, version: number, cb: (err: Error| null) => void): void
   createTag(name: string, cb: (err: Error| null) => void): void
   getTaggedVersion(name: string, cb: (err: Error| null, version: number) => void): void
-  deleteTag(name, cb: (err: Error| null) => void): void
+  deleteTag(name: string, cb: (err: Error| null) => void): void
   getAllTags(cb: (err: Error| null, tags: TagMap) => void): void
 
   download(path: string, cb?: (err: Error| null) => void): void
@@ -259,7 +259,7 @@ export interface Hyperdrive {
   readFile<E=Buffer>(name: string, options: EncodableOptions, cb: (err: Error| null, data: E) => void): void
   readFile<E=Buffer>(name: string, cb: (err: Error| null, data: E) => void): void
 
-  createWriteStream(name): NodeJS.WritableStream
+  createWriteStream(name: string): NodeJS.WritableStream
   writeFile(name: string, data: Buffer | string, options: EncodableOptions, cb: (err: Error| null) => void): void
   writeFile(name: string, data: Buffer | string, cb: (err: Error| null) => void): void
 
